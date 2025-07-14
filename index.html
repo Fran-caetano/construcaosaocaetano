@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Material de Construção São Caetano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* Variáveis CSS para cores */
+        :root {
+            --cor-fundo-principal: #121212; /* Preto escuro */
+            --cor-texto-claro: #e0e0e0;
+            --cor-destaque-amarelo: #FFD700; /* Amarelo dourado */
+            --cor-destaque-laranja: #FF8C00; /* Laranja vibrante */
+            --cor-card-fundo: #1C1C1C; /* Preto ligeiramente mais claro para cards */
+            --cor-card-hover: #2A2A2A;
+            --cor-borda-fina: #333333;
+            --sombra-leve: 0 4px 15px rgba(0,0,0,0.4);
+            --sombra-densa: 0 8px 30px rgba(0,0,0,0.6);
+        }
+
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cor-fundo-principal);
+            color: var(--cor-texto-claro);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+        }
+
+        /* Animação de entrada sutil para elementos */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--cor-fundo-principal), #222222, var(--cor-fundo-principal));
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: var(--sombra-densa);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--cor-destaque-laranja);
+            animation: fadeIn 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--cor-destaque-amarelo);
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+            letter-spacing: 1.5px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.8;
+            color: var(--cor-texto-claro);
+        }
+
+        /* Menu de navegação moderno */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #000000;
+            padding: 18px 20px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--cor-destaque-amarelo);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav a {
+            color: var(--cor-texto-claro);
+            margin: 0 22px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--cor-destaque-laranja);
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--cor-destaque-amarelo);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--cor-card-fundo);
+            border-radius: 15px;
+            box-shadow: var(--sombra-densa);
+            animation: fadeIn 1.2s ease-out forwards;
+            opacity: 0; /* Começa oculto para a animação */
+        }
+        /* Atraso na animação para containers subsequentes */
+        .container:nth-of-type(2) { animation-delay: 0.2s; }
+        .container:nth-of-type(3) { animation-delay: 0.4s; }
+        .container:nth-of-type(4) { animation-delay: 0.6s; }
+        .container:nth-of-type(5) { animation-delay: 0.8s; }
+
+
+        /* Títulos de seção */
+        h2 {
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--cor-destaque-amarelo);
+            border-bottom: 4px solid var(--cor-destaque-laranja);
+            padding-bottom: 12px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 4px;
+            background-color: var(--cor-destaque-amarelo);
+            border-radius: 2px;
+        }
+
+        /* Estilo dos produtos e outros cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--cor-card-fundo);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--sombra-leve);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid var(--cor-borda-fina);
+            overflow: hidden; /* Para garantir que o hover effect não saia */
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--sombra-densa);
+            background-color: var(--cor-card-hover);
+            border-color: var(--cor-destaque-laranja);
+        }
+        
+        /* Efeito de brilho ao passar o mouse */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+            pointer-events: none; /* Garante que não interfere com cliques */
+        }
+        .card:hover::before {
+            opacity: 1;
+            animation: cardBrilho 0.8s forwards;
+        }
+        @keyframes cardBrilho {
+            from { transform: rotate(45deg) scale(0); opacity: 0; }
+            to { transform: rotate(45deg) scale(1); opacity: 1; }
+        }
+
+        .card img {
+            width: 100%;
+            max-height: 220px; /* Altura máxima para imagens */
+            height: auto; /* Mantém a proporção */
+            border-radius: 10px;
+            margin-bottom: 20px;
+            object-fit: contain; /* Garante que a imagem inteira seja visível */
+            border: 2px solid var(--cor-borda-fina);
+            transition: transform 0.3s ease;
+        }
+        .card:hover img {
+            transform: scale(1.03);
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            font-size: 1.6em;
+            color: var(--cor-destaque-amarelo);
+            text-align: center;
+        }
+
+        .card p {
+            font-size: 1.15em;
+            color: var(--cor-texto-claro);
+            margin-bottom: 18px;
+            flex-grow: 1; /* Para que o conteúdo ocupe o espaço disponível */
+        }
+        .card p strong {
+            color: var(--cor-destaque-laranja);
+            font-size: 1.2em;
+        }
+
+        /* Campo de quantidade */
+        .quantity-input-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .quantity-input-group label {
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--cor-destaque-amarelo);
+        }
+
+        .quantity-input-group input[type="number"] {
+            width: 80px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--cor-borda-fina);
+            background-color: #333333;
+            color: var(--cor-destaque-amarelo);
+            font-size: 1.1em;
+            text-align: center;
+            -moz-appearance: textfield;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .quantity-input-group input[type="number"]:focus {
+            outline: none;
+            border-color: var(--cor-destaque-laranja);
+            box-shadow: 0 0 10px var(--cor-destaque-laranja);
+        }
+
+        .quantity-input-group input[type="number"]::-webkit-outer-spin-button,
+        .quantity-input-group input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Botões estilizados e interativos */
+        .button {
+            background-color: var(--cor-destaque-laranja);
+            color: var(--cor-fundo-principal);
+            border: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-align: center;
+            display: block; /* Ocupa a largura total do card */
+            width: 100%;
+            margin-top: auto; /* Empurra o botão para baixo no card */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .button:hover {
+            background-color: #FF6F00; /* Laranja mais escuro no hover */
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+        .button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Formulário de dados do cliente no carrinho */
+        .client-data-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            background-color: #242424;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--sombra-leve);
+            margin-top: 35px;
+            border: 1px solid var(--cor-borda-fina);
+        }
+        
+        .client-data-form label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--cor-destaque-amarelo);
+            font-size: 1.1em;
+        }
+
+        .client-data-form input, 
+        .client-data-form select, 
+        .client-data-form textarea {
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid var(--cor-borda-fina);
+            background-color: #333333;
+            color: var(--cor-texto-claro);
+            font-family: 'Inter', sans-serif;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .client-data-form input:focus, 
+        .client-data-form select:focus, 
+        .client-data-form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 12px var(--cor-destaque-laranja);
+            border-color: var(--cor-destaque-laranja);
+        }
+
+        /* Carrinho */
+        #listaCarrinho {
+            margin-top: 25px;
+            background-color: #242424;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--sombra-leve);
+            border: 1px solid var(--cor-borda-fina);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border-left: 5px solid var(--cor-destaque-amarelo);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .cart-item:hover {
+            background-color: #3a3a3a;
+            transform: translateX(5px);
+        }
+
+        .cart-item span {
+            font-size: 1.1em;
+            color: var(--cor-texto-claro);
+        }
+
+        .cart-item button {
+            background-color: #DC143C; /* Vermelho para remover */
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 600;
+        }
+
+        .cart-item button:hover {
+            background-color: #B20C2D;
+            transform: scale(1.05);
+        }
+
+        #totalCarrinho {
+            color: var(--cor-destaque-laranja);
+            font-size: 1.8em;
+            font-weight: 800;
+            margin-top: 20px;
+            display: block; /* Garante que o span ocupa sua própria linha */
+            text-align: right;
+        }
+
+        /* Seções de contato e PIX */
+        #contato p, #pix-info p {
+            margin: 12px 0;
+            font-size: 1.2em;
+            color: var(--cor-texto-claro);
+            text-align: center;
+        }
+
+        #contato a {
+            color: var(--cor-destaque-amarelo);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        #contato a:hover {
+            color: var(--cor-destaque-laranja);
+            text-decoration: underline;
+        }
+
+        #pix-info strong {
+            color: var(--cor-destaque-laranja);
+            font-size: 1.3em;
+            display: block; /* Para melhor visibilidade da chave */
+            margin-top: 10px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #000000;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            font-size: 0.95em;
+            color: #888;
+            border-top: 3px solid var(--cor-destaque-amarelo);
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
+        }
+
+        /* Botão flutuante do WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366; /* Cor do WhatsApp */
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover {
+            background-color: #1DA851;
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Responsividade */
+        @media(max-width: 992px){
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media(max-width: 768px){
+            header h1 {
+                font-size: 2.2em;
+            }
+            h2 {
+                font-size: 2em;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav a {
+                margin: 8px 0;
+            }
+            .container {
+                margin: 25px auto;
+                padding: 20px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .button {
+                padding: 12px 20px;
+                font-size: 1.05em;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 2em;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media(max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .container {
+                margin: 15px auto;
+                padding: 15px;
+            }
+            .card {
+                padding: 15px;
+            }
+            .card h3 {
+                font-size: 1.3em;
+            }
+            .card p {
+                font-size: 1em;
+            }
+            .quantity-input-group {
+                gap: 8px;
+            }
+            .quantity-input-group input[type="number"] {
+                width: 60px;
+                padding: 8px;
+            }
+            .button {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Material de Construção São Caetano</h1>
+        <p>Sua obra na palma da mão! Qualidade e agilidade ao seu alcance.</p>
+    </header>
+
+    <nav>
+        <a href="#produtos">Produtos</a>
+        <a href="#retroescavadeira">Retroescavadeira</a>
+        <a href="#carrinho">Carrinho</a>
+        <a href="#pagamento">Pagamento PIX</a>
+        <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="container" id="produtos">
+        <h2>Produtos em Destaque</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Tijolo Sergipe</h3>
+                <img src="tijolos.jpg" alt="Tijolo de Sergipe" />
+                <p>O tijolo ideal para a estrutura da sua obra, com resistência e durabilidade comprovadas.</p>
+                <p>Valor por unidade: <strong>R$ 1,00</strong></p>
+                <div class="quantity-input-group">
+                    <label for="qtdTijolo">Qtd:</label>
+                    <input type="number" id="qtdTijolo" value="1" min="1">
+                </div>
+                <button class="button" onclick="adicionarAoCarrinho('Tijolo Sergipe', 1.00, document.getElementById('qtdTijolo').value)">Adicionar ao carrinho</button>
+            </div>
+            <div class="card">
+                <h3>Cimento Poty</h3>
+                <img src="cimento.jpeg" alt="Cimento Poty" />
+                <p>O melhor cimento para concretagem, alvenaria e reboco. Qualidade que não te deixa na mão!</p>
+                <p>Valor por saco: <strong>R$ 40,00</strong></p>
+                <div class="quantity-input-group">
+                    <label for="qtdCimento">Qtd:</label>
+                    <input type="number" id="qtdCimento" value="1" min="1">
+                </div>
+                <button class="button" onclick="adicionarAoCarrinho('Cimento Poty', 40.00, document.getElementById('qtdCimento').value)">Adicionar ao carrinho</button>
+            </div>
+            <div class="card">
+                <h3>Areia Branca</h3>
+                <img src="areia1.jpg" alt="Areia Branca" />
+                <p>Areia selecionada para acabamentos finos e assentamento, garantindo um resultado impecável.</p>
+                <p>Valor por metro: <strong>R$ 100,00</strong></p>
+                <div class="quantity-input-group">
+                    <label for="qtdAreiaBranca">Qtd:</label>
+                    <input type="number" id="qtdAreiaBranca" value="1" min="1">
+                </div>
+                <button class="button" onclick="adicionarAoCarrinho('Areia Branca', 100.00, document.getElementById('qtdAreiaBranca').value)">Adicionar ao carrinho</button>
+            </div>
+            <div class="card">
+                <h3>Areia Lavada</h3>
+                <img src="areia2.jpeg" alt="Areia Lavada" />
+                <p>Perfeita para a preparação de concreto e argamassa, livre de impurezas e de alta qualidade.</p>
+                <p>Valor por metro: <strong>R$ 100,00</strong></p>
+                <div class="quantity-input-group">
+                    <label for="qtdAreiaLavada">Qtd:</label>
+                    <input type="number" id="qtdAreiaLavada" value="1" min="1">
+                </div>
+                <button class="button" onclick="adicionarAoCarrinho('Areia Lavada', 100.00, document.getElementById('qtdAreiaLavada').value)">Adicionar ao carrinho</button>
+            </div>
+            <div class="card">
+                <h3>Brita</h3>
+                <img src="brita.jpg" alt="Brita" />
+                <p>Brita de alta resistência para fundações, estradas e concreto de qualidade superior.</p>
+                <p>Valor por metro: <strong>R$ 240,00</strong></p>
+                <div class="quantity-input-group">
+                    <label for="qtdBrita">Qtd:</label>
+                    <input type="number" id="qtdBrita" value="1" min="1">
+                </div>
+                <button class="button" onclick="adicionarAoCarrinho('Brita', 240.00, document.getElementById('qtdBrita').value)">Adicionar ao carrinho</button>
+            </div>
+            <div class="card">
+                <h3>Telha Brasilit</h3>
+                <img src="telha.jpg" alt="Telha Brasilit" />
+                <p>Cobertura segura e durável para sua casa ou empreendimento. Proteção contra intempéries.</p>
+                <p>Valor por unidade: <strong>R$ 28,00</strong></p>
+                <div class="quantity-input-group">
+                    <label for="qtdTelha">Qtd:</label>
+                    <input type="number" id="qtdTelha" value="1" min="1">
+                </div>
+                <button class="button" onclick="adicionarAoCarrinho('Telha Brasilit', 28.00, document.getElementById('qtdTelha').value)">Adicionar ao carrinho</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="retroescavadeira">
+        <h2>Serviço de Retroescavadeira</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Aluguel de Retroescavadeira</h3>
+                <img src="maq.jpeg" alt="Retroescavadeira" />
+                <p>Ideal para escavação, aterro, terraplenagem e movimentação de materiais pesados. Agilidade na sua obra!</p>
+                <p>Valor por hora: <strong style="color: var(--cor-destaque-laranja);">R$ 250,00</strong></p>
+                <button class="button" onclick="selecionarRetroescavadeira()">Solicitar Orçamento</button>
+            </div>
+            <div class="card">
+                <h3>Por que escolher nosso serviço?</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle" style="color: var(--cor-destaque-amarelo);"></i> Profissionais qualificados e experientes.</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--cor-destaque-amarelo);"></i> Equipamentos modernos e com manutenção em dia.</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--cor-destaque-amarelo);"></i> Agilidade e eficiência na execução do serviço.</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--cor-destaque-amarelo);"></i> Atendimento personalizado para suas necessidades.</li>
+                    <li><i class="fas fa-check-circle" style="color: var(--cor-destaque-amarelo);"></i> Otimização do tempo e recursos da sua obra.</li>
+                </ul>
+                <p style="font-size: 0.95em; color: #aaa; margin-top: 15px;">Clique em "Solicitar Orçamento" e fale conosco no WhatsApp para mais detalhes!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="carrinho">
+        <h2>Seu Carrinho de Compras</h2>
+        <div id="listaCarrinho">
+            <p style="text-align: center; color: #aaa;">Seu carrinho está vazio.</p>
+        </div>
+        <p style="text-align: right; font-size: 1.3em; font-weight: 700; margin-top: 25px;">Total Estimado: <span id="totalCarrinho">R$ 0.00</span></p>
+        <button class="button" onclick="limparCarrinho()" style="margin-top: 25px; background-color: #555; color: var(--cor-texto-claro);">Limpar Carrinho</button>
+
+        <div class="client-data-form">
+            <h3>Dados para o Pedido / Orçamento</h3>
+            <label for="nomePedido">Nome Completo</label>
+            <input type="text" id="nomePedido" required placeholder="Seu nome aqui..." />
+
+            <label for="telefonePedido">Telefone (WhatsApp)</label>
+            <input type="tel" id="telefonePedido" required placeholder="(XX) XXXXX-XXXX" />
+
+            <label for="enderecoPedido">Endereço de Entrega/Serviço</label>
+            <input type="text" id="enderecoPedido" required placeholder="Rua, Número, Bairro, Cidade, CEP" />
+
+            <label for="tipoPedido">Tipo de Solicitação</label>
+            <select id="tipoPedido">
+                <option value="entrega">Entrega de Produtos</option>
+                <option value="retirada">Retirada de Produtos</option>
+                <option value="servico_local">Serviço de Retroescavadeira no Local</option>
+            </select>
+
+            <label for="observacoesPedido">Observações (Opcional)</label>
+            <textarea id="observacoesPedido" rows="4" placeholder="Algum detalhe importante para o seu pedido ou serviço?"></textarea>
+
+            <button type="button" class="button" onclick="fecharPedidoWhatsApp()" style="background-color: #25D366; color: white;">Finalizar Pedido no WhatsApp</button>
+        </div>
+    </div>
+
+    <div class="container" id="pagamento">
+        <h2>Pagamento Facilitado via PIX</h2>
+        <p>Realize seu pagamento de forma rápida, segura e sem taxas!</p>
+        <p>Chave PIX (CNPJ): <strong style="color: var(--cor-destaque-laranja);">53495424000130</strong></p>
+        <p>Nome do Beneficiário: <strong style="color: var(--cor-destaque-amarelo);">A. Caetano da Silva</strong></p>
+        <p>Banco: <strong style="color: var(--cor-destaque-amarelo);">Bradesco</strong></p>
+        <p style="font-size: 0.95em; color: #aaa; margin-top: 25px;">Após a transação, envie o comprovante de pagamento para nosso WhatsApp para agilizar a confirmação e envio do seu pedido.</p>
+    </div>
+
+    <div class="container" id="contato">
+        <h2>Fale Conosco</h2>
+        <p>Estamos prontos para te atender e tirar todas as suas dúvidas!</p>
+        <p>Telefone (WhatsApp): <a href="https://wa.me/5582996696084" target="_blank">(82) 99669-6084</a></p>
+        <p>Email: <a href="mailto:materialsaocaetano@gmail.com">materialsaocaetano@gmail.com</a></p>
+        <p>Endereço: Av. Rotary, 130 - Palmeira dos Índios - AL</p>
+        <p style="margin-top: 20px;">Visite-nos ou entre em contato online para um atendimento personalizado!</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Material de Construção São Caetano. Todos os direitos reservados.</p>
+    </footer>
+
+    <a href="https://wa.me/5582996696084" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <script>
+        const carrinho = [];
+        const telefoneEmpresa = "5582996696084"; // Número de WhatsApp da empresa
+
+        function adicionarAoCarrinho(produto, preco, quantidadeStr) {
+            const quantidade = parseInt(quantidadeStr, 10);
+            if (isNaN(quantidade) || quantidade <= 0) {
+                alert("Por favor, insira uma quantidade válida.");
+                return;
+            }
+
+            const itemExistente = carrinho.find(item => item.produto === produto);
+            if (itemExistente) {
+                itemExistente.quantidade += quantidade;
+            } else {
+                carrinho.push({ produto, preco, quantidade });
+            }
+            atualizarCarrinho();
+            showNotification(`${quantidade}x ${produto} adicionado(s) ao carrinho!`);
+        }
+
+        function selecionarRetroescavadeira() {
+            const servicoRetro = 'Aluguel de Retroescavadeira';
+            const precoRetro = 250.00;
+            const itemExistente = carrinho.find(item => item.produto === servicoRetro);
+
+            if (!itemExistente) {
+                carrinho.push({ produto: servicoRetro, preco: precoRetro, quantidade: 1, isService: true });
+            }
+            atualizarCarrinho();
+            document.getElementById('carrinho').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('tipoPedido').value = 'servico_local';
+            showNotification('Serviço de Retroescavadeira adicionado ao carrinho de orçamento!');
+        }
+
+        function atualizarCarrinho() {
+            const lista = document.getElementById("listaCarrinho");
+            const totalElement = document.getElementById("totalCarrinho");
+            lista.innerHTML = "";
+            let total = 0;
+
+            if (carrinho.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #aaa;">Seu carrinho está vazio.</p>';
+            } else {
+                carrinho.forEach((item, index) => {
+                    const div = document.createElement("div");
+                    div.className = "cart-item";
+                    let itemDisplay;
+                    if (item.isService) {
+                        itemDisplay = `${item.produto} - R$ ${item.preco.toFixed(2)}/hora (Estimado)`;
+                    } else {
+                        itemDisplay = `${item.produto} (x${item.quantidade}) - R$ ${(item.preco * item.quantidade).toFixed(2)}`;
+                        total += item.preco * item.quantidade;
+                    }
+                    
+                    div.innerHTML = `
+                        <span>${itemDisplay}</span>
+                        <button onclick="removerItem(${index})">Remover</button>
+                    `;
+                    lista.appendChild(div);
+                });
+            }
+            totalElement.textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function removerItem(index) {
+            const removedItem = carrinho.splice(index, 1)[0];
+            atualizarCarrinho();
+            showNotification(`${removedItem.produto} removido do carrinho.`);
+        }
+
+        function limparCarrinho() {
+            if (carrinho.length === 0) {
+                alert("Seu carrinho já está vazio!");
+                return;
+            }
+            if (confirm("Tem certeza que deseja limpar todo o carrinho?")) {
+                carrinho.length = 0;
+                atualizarCarrinho();
+                showNotification('Carrinho limpo com sucesso!');
+            }
+        }
+
+        function fecharPedidoWhatsApp() {
+            const nome = document.getElementById("nomePedido").value;
+            const telefone = document.getElementById("telefonePedido").value;
+            const endereco = document.getElementById("enderecoPedido").value;
+            const tipoPedido = document.getElementById("tipoPedido").value;
+            const observacoes = document.getElementById("observacoesPedido").value;
+
+            if (!nome || !telefone || !endereco) {
+                alert("Por favor, preencha todos os seus dados (Nome, Telefone e Endereço) para fechar o pedido.");
+                return;
+            }
+            if (carrinho.length === 0 && tipoPedido !== 'servico_local') {
+                alert("Seu carrinho está vazio. Adicione produtos ou selecione o serviço de retroescavadeira para prosseguir.");
+                return;
+            }
+
+            let mensagemWhatsApp = `Olá! Gostaria de fechar um pedido / solicitar um orçamento:\n\n`;
+            mensagemWhatsApp += `*Dados do Cliente:*\n`;
+            mensagemWhatsApp += `Nome: ${nome}\n`;
+            mensagemWhatsApp += `Telefone: ${telefone}\n`;
+            mensagemWhatsApp += `Endereço: ${endereco}\n`;
+            mensagemWhatsApp += `Tipo de Solicitação: ${tipoPedido === 'entrega' ? 'Entrega de Produtos' : tipoPedido === 'retirada' ? 'Retirada de Produtos' : 'Serviço de Retroescavadeira no Local'}\n`;
+            
+            if (observacoes) {
+                mensagemWhatsApp += `Observações: ${observacoes}\n`;
+            }
+            mensagemWhatsApp += `\n`;
+
+            if (carrinho.length > 0) {
+                mensagemWhatsApp += `*Itens da Solicitação:*\n`;
+                let totalGeralProdutos = 0;
+                let temServico = false;
+
+                carrinho.forEach(item => {
+                    if (item.isService) {
+                        mensagemWhatsApp += `- ${item.produto} (R$ ${item.preco.toFixed(2)}/hora). Por favor, especifique o tempo de uso estimado nas observações.\n`;
+                        temServico = true;
+                    } else {
+                        mensagemWhatsApp += `- ${item.produto} (x${item.quantidade}) - Valor Unitário: R$ ${item.preco.toFixed(2)} - Subtotal: R$ ${(item.preco * item.quantidade).toFixed(2)}\n`;
+                        totalGeralProdutos += item.preco * item.quantidade;
+                    }
+                });
+                
+                if (totalGeralProdutos > 0) {
+                    mensagemWhatsApp += `\n*Total Estimado dos Produtos: R$ ${totalGeralProdutos.toFixed(2)}*\n`;
+                }
+                if (temServico) {
+                    mensagemWhatsApp += `\n*OBS: Valores de serviços (Retroescavadeira) são orçados por hora. O valor final será confirmado após análise da solicitação.*\n`;
+                }
+                mensagemWhatsApp += `\n`;
+
+            } else if (tipoPedido === 'servico_local') {
+                mensagemWhatsApp += `*Nenhum produto selecionado, apenas solicitação de Serviço de Retroescavadeira.*\n`;
+                mensagemWhatsApp += `Valor estimado: R$ 250,00 por hora. Por favor, especifique o tempo de uso ou detalhes na seção de observações.\n\n`;
+            } else {
+                mensagemWhatsApp += `*Nenhum item selecionado. Por favor, adicione produtos ou solicite um serviço.*\n\n`;
+            }
+
+            mensagemWhatsApp += `*Informações para Pagamento PIX (se aplicável para produtos):*\n`;
+            mensagemWhatsApp += `Chave PIX (CNPJ): 53495424000130\n`;
+            mensagemWhatsApp += `Nome: A. Caetano da Silva\n`;
+            mensagemWhatsApp += `Banco: Bradesco\n`;
+            mensagemWhatsApp += `\n*Após realizar o pagamento, por favor, envie o comprovante para este WhatsApp para agilizar o processo.*\n`;
+            
+            const url = `https://wa.me/${telefoneEmpresa}?text=${encodeURIComponent(mensagemWhatsApp)}`;
+            window.open(url, '_blank');
+            
+            // Opcional: Limpar o carrinho e os dados do formulário após o envio
+            // limparCarrinho();
+            // document.getElementById("nomePedido").value = "";
+            // document.getElementById("telefonePedido").value = "";
+            // document.getElementById("enderecoPedido").value = "";
+            // document.getElementById("observacoesPedido").value = "";
+        }
+
+        // Função para mostrar notificações (poderia ser um toast/snackbar)
+        function showNotification(message) {
+            // Implementação simples de alerta, para um site real, usaria um elemento flutuante
+            alert(message); 
+        }
+
+        document.addEventListener('DOMContentLoaded', atualizarCarrinho);
+    </script>
+</body>
+</html>
